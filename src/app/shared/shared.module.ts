@@ -29,7 +29,7 @@ import {
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatButtonToggleModule,
-  MatChipsModule,
+  MatChipsModule
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';

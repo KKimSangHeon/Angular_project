@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {VerifyImageService} from '../service/verifyimage.service';
 
 
+
+
 @Component({
   selector: 'app-verifyimage',
   templateUrl: './verifyimage.component.html',
