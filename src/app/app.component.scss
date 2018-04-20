@@ -1,0 +1,49 @@
+/*
+ * Import required theme for Material2
+ */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+/*
+ * Actual Sticky Footer Styles
+ */
+.all-wrap {
+  min-height: 100vh;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.sidenav{
+  width:300px;
+
+}
+
+.sidenav-title{
+  font-size: 30px;
+
+  font-family:fantasy
+}
+.sidenav-subtitle{
+
+font-family:fantasy
+}
+
+/*
+ */
+main {
+  display: flex;
+  flex-direction: column;
+  > *:not(router-outlet) {
+    flex: 1;
+    display: block;
+  }
+}

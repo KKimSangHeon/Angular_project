@@ -1,2 +1,57 @@
-aa
-  <router-outlet></router-outlet>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<mat-sidenav-container class="all-wrap" fullscreen>
+  <mat-sidenav #sidenav class="sidenav"  mode="over">
+    <mat-list >
+
+
+      <mat-list >
+        <mat-list-item>
+          <img mat-list-avatar src="./assets/image/favicon.ico">
+          <span mat-line><p class="sidenav-title">Verify Tool</p></span>
+        </mat-list-item>
+      </mat-list>
+
+      <!-- <mat-list-item routerLink="imageverify"> Image Verify</mat-list-item>
+      <mat-list-item routerLink="metadataverify"> Metadata Verify</mat-list-item> -->
+
+<mat-nav-list >
+      <ng-container >
+        <mat-list-item (click)="onClickSideMenu('/imageverify');sidenav.close();">
+          <mat-icon>image</mat-icon>
+          <span mat-line><p class="sidenav-subtitle">Image Verify</p></span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+
+      <ng-container >
+        <mat-list-item (click)="onClickSideMenu('/metadataverify');sidenav.close();" >
+          <mat-icon>receipt</mat-icon>
+          <span mat-line><p class="sidenav-subtitle">Metadata Verify</p></span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+</mat-nav-list>
+
+    </mat-list>
+  </mat-sidenav>
+
+  <div class="page-wrap">
+    <header role="banner">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          mat-icon-button
+          (click)="sidenav.open()"
+          title="Open sidenav">
+          <mat-icon>menu</mat-icon>
+        </button>
+            Image Verify
+      </mat-toolbar>
+    </header>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+</mat-sidenav-container>
