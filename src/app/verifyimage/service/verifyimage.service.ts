@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
-export class MetadataVerifyService {
+export class VerifyImageService {
 
   constructor(private http: Http) {
   }

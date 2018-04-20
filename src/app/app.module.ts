@@ -7,15 +7,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import {Route} from './app.route';
 import {SharedModule} from './shared/shared.module';
-import {ImageVerifyModule} from './imageverify/imageverify.module';
-import {MetadataVerifyModule} from './metadataverify/metadataverify.module';
+import {VerifyImageModule} from './verifyimage/verifyimage.module';
+import {VerifyMetadataModule} from './verifymetadata/verifymetadata.module';
 
 @NgModule({
 
   imports: [
     BrowserModule,
-    ImageVerifyModule,
-    MetadataVerifyModule,
+    VerifyImageModule,
+    VerifyMetadataModule,
     Route,
     SharedModule,
     BrowserAnimationsModule

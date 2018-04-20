@@ -12,12 +12,12 @@
         </mat-list-item>
       </mat-list>
 
-      <!-- <mat-list-item routerLink="imageverify"> Image Verify</mat-list-item>
-      <mat-list-item routerLink="metadataverify"> Metadata Verify</mat-list-item> -->
+      <!-- <mat-list-item routerLink="verifyimage"> Image Verify</mat-list-item>
+      <mat-list-item routerLink="verifymetadata"> Metadata Verify</mat-list-item> -->
 
 <mat-nav-list >
       <ng-container >
-        <mat-list-item (click)="onClickSideMenu('/imageverify');sidenav.close();">
+        <mat-list-item (click)="onClickSideMenu('/verifyimage');sidenav.close();">
           <mat-icon>image</mat-icon>
           <span mat-line><p class="sidenav-subtitle">Image Verify</p></span>
           <mat-divider></mat-divider>
@@ -25,7 +25,7 @@
       </ng-container>
 
       <ng-container >
-        <mat-list-item (click)="onClickSideMenu('/metadataverify');sidenav.close();" >
+        <mat-list-item (click)="onClickSideMenu('/verifymetadata');sidenav.close();" >
           <mat-icon>receipt</mat-icon>
           <span mat-line><p class="sidenav-subtitle">Metadata Verify</p></span>
           <mat-divider></mat-divider>

@@ -5,8 +5,8 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import {ImageVerifyComponent} from './imageverify/components/imageverify.component';
-import {MetadataVerifyComponent} from './metadataverify/components/metadataverify.component';
+import {VerifyImageComponent} from './verifyimage/components/verifyimage.component';
+import {VerifyMetadataComponent} from './verifymetadata/components/verifymetadata.component';
 
 
 const appRoutes: Routes = [
@@ -15,23 +15,23 @@ const appRoutes: Routes = [
   children: [
     {
       path: '',
-      redirectTo: 'imageverify',
+      redirectTo: 'verifyimage',
       pathMatch: 'full',
     },
     {
-      path: 'imageverify',
-      component: ImageVerifyComponent,
+      path: 'verifyimage',
+      component: VerifyImageComponent,
       data: {
         nav: {
-          name: 'ImageVerify',
+          name: 'VerifyImage',
           comment: '이미지 검증',
           icon: 'dashboard',
         }
       }
     },
     {
-      path: 'metadataverify',
-      component: MetadataVerifyComponent,
+      path: 'verifymetadata',
+      component: VerifyMetadataComponent,
       data: {
         nav: {
           name: 'metadataVerify',
