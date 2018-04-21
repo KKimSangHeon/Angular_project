@@ -44,7 +44,7 @@ import {HttpModule} from '@angular/http';
     MatSnackBarModule, MatDialogModule, MatLineModule, MatToolbarModule, MatSelectModule, MatCardModule, MatRippleModule,
     MatPaginatorModule, MatSlideToggleModule, MatTabsModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatButtonToggleModule, MatChipsModule, MatSliderModule,
-   HttpModule, ReactiveFormsModule,FormsModule
+   HttpModule, ReactiveFormsModule,FormsModule,
   ],
   declarations: [
 

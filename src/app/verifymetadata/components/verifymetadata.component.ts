@@ -8,7 +8,7 @@ import {VerifyMetadataService} from '../service/verifymetadata.service';
   templateUrl: './verifymetadata.component.html',
   styleUrls: ['./verifymetadata.component.scss'],
 })
-export class VerifyMetadataComponent  {
-
+export class VerifyMetadataComponent   {
+transparency = 0;
 
 }

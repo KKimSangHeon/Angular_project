@@ -12,5 +12,26 @@ import {VerifyImageService} from '../service/verifyimage.service';
 })
 export class VerifyImageComponent  {
 
+transparency = 3;
+imageURL:string = '';
+
+
+stableImageURL:string = 'http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
+devImageURL:string = 'http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
+resultImageURL:string = 'http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
+
+onClickClearButton() {
+  this.imageURL = '';
+  this.transparency = 0;
+
+}
+
+onClickVerifyButton() {
+  this.stableImageURL = this.imageURL;
+  this.devImageURL = this.imageURL;
+  this.resultImageURL = this.imageURL;
+}
+
+
 
 }

@@ -1,61 +1,76 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Image URL" value="www.">
-  </mat-form-field>
-
-<mat-slider></mat-slider>
-
-  <button mat-raised-button color="primary">Primary</button>
-</form>
 
 
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
+<div  class ="input-form">
+    <p class="input-form-title">Input Verify Data</p>
+
+      <div class="input-form-elements" >
+          <div style='display:inline;float:left;width:30%' ><label >Image URL</label></div>
+          <div style='display:inline;float:left;width:60%'><input class="input-element1" [(ngModel)]="imageURL" style="border: 0px;border-bottom: #9B9B9B 1.5px solid; background-color: #FAFAFA;"> </div>
+      </div>
+
+      <div class="input-form-elements" >
+          <div style='display:inline;float:left;width:30%'><label >Transparency : {{transparency}}</label></div>
+          <div style='display:inline;float:left;width:60%'> <mat-slider  min="0" max="5" step="1" [(ngModel)]="transparency"class="input-element2"></mat-slider></div>
+      </div>
+
+      <div class="input-form-button">
+       <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:60px;' (click) = "onClickVerifyButton()">Verify</button>
+       <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:20px;' (click)="onClickClearButton()">Clear</button>
+      </div>
+</div>
+
+
+<div  class ="result-form">
+  <div style='display:inline;float:left;width:30%'>
+    <mat-card class="card">
+          <mat-card-header class="card-header">
+              <mat-card-title>Stable Server Image</mat-card-title>
+          </mat-card-header>
+
+          <img  mat-card-image  src="{{stableImageURL}}" >
+
+          <mat-card-content>
+            <a href="http://www.naver.com">
+              Original Image
+            </a>
+          </mat-card-content>
+
+
+    </mat-card>
+  </div>
+
+  <div style='display:inline;float:left;width:30%; margin-left:40px'>
+    <mat-card class="card">
+          <mat-card-header class="card-header">
+              <mat-card-title>Dev Server Image</mat-card-title>
+          </mat-card-header>
+
+          <img  mat-card-image  src="{{devImageURL}}"  >
+          <mat-card-content>
+            <a href="http://www.naver.com">
+              Original Image
+            </a>
+          </mat-card-content>
 
 
 
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    </mat-card>
+  </div>
+
+  <div style='display:inline;float:left;width:30%; margin-left:40px'>
+    <mat-card class="card">
+          <mat-card-header class="card-header">
+              <mat-card-title>Verified Image</mat-card-title>
+          </mat-card-header>
+
+          <img mat-card-image src="{{resultImageURL}}"  >
 
 
+          <mat-card-content>
+            <a href="http://www.naver.com">Original Image</a>
+            <p>PSNR : {{psnr}}</p>
+          </mat-card-content>
 
-  <mat-card-content>
-    <p>
-      여기에 수치값
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-
-
-
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-
-
-  <mat-card-content>
-    <p>
-      여기에 수치값
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
+    </mat-card>
+  </div>
+</div>
