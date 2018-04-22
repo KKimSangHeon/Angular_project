@@ -17,39 +17,50 @@
 </div>
 
 
-<div  class ="result-form">
-    <div style='display:inline;float:left;width:30%;' >
-      <mat-card class="card">
-            <mat-card-header class="card-header">
-                <mat-card-title>Compared Metadata Image</mat-card-title>
-            </mat-card-header>
 
-            <img  mat-card-image  src="{{resizedCompareMetadataImageURL}}" >
-
-            <mat-card-content>
-
-              <a href="{{originalCompareMetadataImageURL}}" style="text-decoration:none;">
-                  Original Image
-              </a>
-              <p>Diff Fiugure : {{compareFigure}}</p>
-            </mat-card-content>
+    <div style='display:inline;float:left;width:100%;' >
+      <div  class ="result-form">
 
 
-      </mat-card>
+            <table>
+              <colgroup>
+                  <col width="40">
+                  <col>
+                  <col width="40">
+                  <col>
+              </colgroup>
+              <tbody>
+
+                      <tr  *ngFor="let item of metadataList; let i =index">
+                            <!--  case3은 메타데이터1이 공백이고 case4는 메타데이터2가 공백이다 -->
+
+
+                          <!-- case1 : 두메타데이터가 동일한 key를 갖고 있으나 value는 다름 -->
+                              <td class="line-num red-num" *ngIf="item['case'] == '1'">{{i+1}}</td>
+                              <td class="line-data red-data" *ngIf="item['case'] == '1'"><span>&nbsp;- {{item['metadata1']}}</span></td>
+                              <td class="line-num green-num" *ngIf="item['case'] == '1'">{{i+1}}</td>
+                              <td class="line-data green-data" *ngIf="item['case'] == '1'"><span>&nbsp;+ {{item['metadata2']}}</span></td>
+
+                          <!-- case1 : 두메타데이터가 동일한 key를 갖고 있으나 value도 일치 -->
+                              <td class="line-num" *ngIf="item['case'] == '2'">{{i+1}}</td>
+                              <td class="line-data" *ngIf="item['case'] == '2'"><span>&nbsp;&nbsp;&nbsp;{{item['metadata1']}}</span></td>
+                              <td class="line-num" *ngIf="item['case'] == '2'">{{i+1}}</td>
+                              <td class="line-data" *ngIf="item['case'] == '2'"><span>&nbsp;&nbsp;&nbsp;{{item['metadata2']}}</span></td>
+
+                          <!-- case1 : 메타데이터1에선 없던것을 메타데이터 2가 해당값을 갖고있음 -->
+                              <td class="line-num" *ngIf="item['case'] == '3'">{{i+1}}</td>
+                              <td class="line-data" *ngIf="item['case'] == '3'"><span> &nbsp;&nbsp;&nbsp;{{item['metadata1']}}</span></td>
+                              <td class="line-num green-num" *ngIf="item['case'] == '3'">{{i+1}}</td>
+                              <td class="line-data green-data" *ngIf="item['case'] == '3'"><span> &nbsp;+ {{item['metadata2']}}</span></td>
+
+                          <!-- case1 : 메타데이터1에 있던게 메타데이터2에선 사라짐 -->
+                              <td class="line-num red-num" *ngIf="item['case'] == '4'">{{i+1}}</td>
+                              <td class="line-data red-data" *ngIf="item['case'] == '4'"><span> &nbsp;- {{item['metadata1']}}</span></td>
+                              <td class="line-num" *ngIf="item['case'] == '4'">{{i+1}}</td>
+                              <td class="line-data" *ngIf="item['case'] == '4'"><span>&nbsp;&nbsp;&nbsp;  {{item['metadata2']}}</span></td>
+
+                      </tr>
+              </tbody>
+            </table>
     </div>
-
-
-        <div class="metadataTextarea1" style='display:block;float:left;width:30%;'>
-          <mat-form-field class="textArea">
-              <textarea style="overflow:auto;" wrap="off" rows="24" readonly matInput placeholder="Dev Server Metadata">{{devMetadata}}</textarea>
-          </mat-form-field>
-        </div>
-
-        <div  class="metadataTextarea2"  style='display:block;float:left;width:30%;'>
-          <mat-form-field class="textArea">
-              <textarea style="overflow:auto;" wrap="off" rows="24" readonly  matInput placeholder="Stable Server Metadata">{{stableMetadata}}</textarea>
-          </mat-form-field>
-        </div>
-
-
-    </div>
+</div>

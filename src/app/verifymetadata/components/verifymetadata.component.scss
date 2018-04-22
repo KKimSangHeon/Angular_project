@@ -1,6 +1,5 @@
 *{
-  font-family:Arial
-
+  font-family:Arial;
 
 }
 
@@ -40,36 +39,33 @@ width:1000px;
 margin-top: 25px;
 margin-bottom:30px;
 
-}
-
-.card {
-  // result-form 의 width 의 반만하자( 사이텀 고려해서 20px정도 빼자)
-  width:250px;
-
 
 }
 
-.textArea{
 
-  width:300px;
-  height:300px;
+.line-num{
+  width:5px;
+  text-align: center;
 }
 
-/deep/ .mat-input-placeholder  {
-color: #3F51B5;
-font-size: 20px;
+
+.line-data{
+  width:500px;
+word-break:break-all;
 }
 
-/deep/ .mat-form-field-placeholder {
-  font-size: 25px !important;
 
+.red-num{
+  background-color: #ffdce0;
+  border-color: #fdaeb7;
 }
-
-.metadataTextarea1{
-  padding-left: 20px;
-
+.red-data{
+  background-color:#ffeef0;
 }
-.metadataTextarea2{
-  padding-left: 20px;
-
+.green-num{
+  background-color: #cdffd8;
+  border-color: #bef5cb;
 }
+.green-data{
+  background-color: #e6ffed;
+ }

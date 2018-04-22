@@ -35,6 +35,7 @@ import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import 'lodash';
 
 
 @NgModule({
@@ -59,7 +60,7 @@ import {HttpModule} from '@angular/http';
     MatSnackBarModule, MatDialogModule, MatLineModule, MatToolbarModule, MatSelectModule, MatCardModule, MatRippleModule,
     MatPaginatorModule, MatSlideToggleModule, MatTabsModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatButtonToggleModule, MatChipsModule, MatSliderModule,
-    FormsModule, HttpModule,ReactiveFormsModule
+    FormsModule, HttpModule,ReactiveFormsModule,
 
   ],
 
