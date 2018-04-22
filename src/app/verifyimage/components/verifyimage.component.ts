@@ -24,8 +24,8 @@ export class VerifyImageComponent  {
     originalStableServerImageURL:string;
     originalDevServerImageURL:string;
     originalVerifyImageURL:string;
-    PSNRURL:string;
-
+    PSNRURL:string = '';
+    psnr:string = '0';
     constructor(private verifyImageService: VerifyImageService,
                 private cdr: ChangeDetectorRef) {
 }
@@ -50,6 +50,7 @@ this.cdr.detectChanges();
 
     onClickVerifyButton() {
 
+
       /*
           this.resizedStableServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=stable&size=200x200&transparency='+this.transparency;
           this.resizedDevServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=dev&size=200x200&transparency='+this.transparency;
@@ -61,14 +62,30 @@ this.cdr.detectChanges();
 
           this.PSNRURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=figure';
 
+
+            아래 7줄 지우기
       */
       this.resizedStableServerImageURL = this.imageURL;
       this.resizedDevServerImageURL = this.imageURL;
       this.resizedResultImageURL = this.imageURL;
-
       this.originalStableServerImageURL = this.resizedStableServerImageURL;
       this.originalDevServerImageURL = this.resizedStableServerImageURL;
       this.originalVerifyImageURL = this.resizedStableServerImageURL;
+      this.PSNRURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+
+
+
+      this.verifyImageService.getPSNR(this.PSNRURL).subscribe(
+      res => {
+          console.log(res);
+              this.psnr = res['_body'];
+
+        },
+      err => {
+          this.psnr ='getPSNR err';
+          console.log(err);
+      }
+    );
 
     }
 }

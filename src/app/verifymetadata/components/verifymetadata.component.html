@@ -24,14 +24,14 @@
                 <mat-card-title>Compared Metadata Image</mat-card-title>
             </mat-card-header>
 
-            <img  mat-card-image  src="{{resizedResultImageURL}}" >
+            <img  mat-card-image  src="{{resizedCompareMetadataImageURL}}" >
 
             <mat-card-content>
 
-              <a href="{{originalCompareMetadataURL}}" style="text-decoration:none;">
+              <a href="{{originalCompareMetadataImageURL}}" style="text-decoration:none;">
                   Original Image
               </a>
-              <p>Diff Fiugure : {{comparefigure}}</p>
+              <p>Diff Fiugure : {{compareFigure}}</p>
             </mat-card-content>
 
 
@@ -41,13 +41,13 @@
 
         <div class="metadataTextarea1" style='display:block;float:left;width:30%;'>
           <mat-form-field class="textArea">
-              <textarea style="overflow:auto;" wrap="off" rows="24" readonly matInput placeholder="Dev Server Metadata">{{metadata1}}</textarea>
+              <textarea style="overflow:auto;" wrap="off" rows="24" readonly matInput placeholder="Dev Server Metadata">{{devMetadata}}</textarea>
           </mat-form-field>
         </div>
 
         <div  class="metadataTextarea2"  style='display:block;float:left;width:30%;'>
           <mat-form-field class="textArea">
-              <textarea style="overflow:auto;" wrap="off" rows="24" readonly  matInput placeholder="Stable Server Metadata">{{metadata2}}</textarea>
+              <textarea style="overflow:auto;" wrap="off" rows="24" readonly  matInput placeholder="Stable Server Metadata">{{stableMetadata}}</textarea>
           </mat-form-field>
         </div>
 

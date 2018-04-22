@@ -10,4 +10,10 @@ export class VerifyImageService {
   constructor(private http: Http) {
   }
 
+
+  getPSNR(URL:string): Observable<any> {
+    return this.http.get(URL)
+    .map(response => response);
+  }
+
 }

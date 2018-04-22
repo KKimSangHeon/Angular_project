@@ -11,7 +11,7 @@ export class VerifyMetadataComponent implements OnInit  {
 
 serverURL:string = '10.22222222222222.com';
 defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
-resizedResultImageURL:string = this.defaultImageURL;
+resizedCompareMetadataImageURL:string = this.defaultImageURL;
 
 transparency = 0;
 metadataURL:string ;
@@ -19,54 +19,91 @@ originalDevServerMetadataURL:string;
 originalStableServerMetadataURL:string;
 originalDevServerImageURL:string;
 
-originalCompareMetadataURL:string = '';
+originalCompareMetadataImageURL:string = '';
 compareFigureURL:string='';
-comparefigure:string='';
+compareFigure:string='0';
 
-metadata1:string= 'aaaassssssssssssssss\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n';
-metadata2:string = 'aaaassssssssssssssss\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n'
-+'aaaaaaaaaaaaaaaaaaaaaaa\n';
+devMetadata:string= '';
+stableMetadata:string = '';
 
 constructor(private verifyMetadataService: VerifyMetadataService,
             private cdr: ChangeDetectorRef) {
 }
 
 ngOnInit() {
-this.cdr.detectChanges();
+      this.cdr.detectChanges();
 
 }
 
 
 onClickClearButton() {
   this.metadataURL = '';
-  this.resizedResultImageURL = this.defaultImageURL;
+  this.resizedCompareMetadataImageURL = this.defaultImageURL;
+  this.stableMetadata = '';
+  this.devMetadata ='';
+  this.compareFigure='0';
 
+  this.cdr.detectChanges();
 }
 
 onClickVerifyButton() {
 
 /*
-  this.resizedResultImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&size=200x200&resType=image';
-  this.originalCompareMetadataURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=image';
-  this.compareFigureURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=figure';
 
 
+  this.resizedCompareMetadataImageURL = this.serverURL+ '?fileAddress=' +this.metadataURL+'&method=verify&size=200x200&resType=image';
+  this.originalCompareMetadataImageURL = this.serverURL+ '?fileAddress=' +this.metadataURL+'&method=verify&resType=image';
+  this.compareFigureURL = this.serverURL+ '?fileAddress=' +this.metadataURL+'&method=verify&resType=figure';
+  this.originalDevServerMetadataURL =  this.serverURL+ '?fileAddress=' +this.metadataURL+'&method=delivery&server=dev';
+  this.originalStableServerMetadataURL =  this.serverURL+ '?fileAddress=' +this.metadataURL+'&method=delivery&server=stable';
+
+주석해제하고 아래 5줄 지우기
 */
 
-    this.originalCompareMetadataURL = this.metadataURL;
-    this.resizedResultImageURL = this.metadataURL;
+    this.originalCompareMetadataImageURL = this.metadataURL;
+    this.resizedCompareMetadataImageURL = this.metadataURL;
+    this.originalDevServerMetadataURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22';
+    this.originalStableServerMetadataURL =  'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+    this.compareFigureURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+
+
+
+    this.verifyMetadataService.getData(this.originalDevServerMetadataURL).subscribe(
+    res => {
+        console.log(res);
+            this.devMetadata = res['_body'];
+            this.cdr.detectChanges();
+      },
+    err => {
+        this.devMetadata ='get metadata err';
+        console.log(err);
+    }
+  );
+
+  this.verifyMetadataService.getData(this.originalStableServerMetadataURL).subscribe(
+  res => {
+      console.log(res);
+      this.stableMetadata = res['_body'];
+      this.cdr.detectChanges();
+    },
+  err => {
+      this.stableMetadata ='get metadata err';
+      console.log(err);
+  }
+);
+
+this.verifyMetadataService.getData(this.compareFigureURL).subscribe(
+  res => {
+      console.log(res);
+      this.compareFigure = res['_body'];
+      this.cdr.detectChanges();
+    },
+  err => {
+      this.compareFigure ='get compareFigure err';
+      console.log(err);
+  }
+);
+
+
   }
 }
