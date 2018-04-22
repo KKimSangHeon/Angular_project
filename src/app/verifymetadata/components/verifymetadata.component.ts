@@ -44,15 +44,15 @@ ngOnInit() {
       this.metadataList.push(
         {
         "key":'qqqq'
-        ,"metadata1":'aaaaaaaaaaaaaaaaaaaa'
-        ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
+        ,"metadata1":'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
+        ,"metadata2": 'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
         ,"case" : '1'
         }
       )
         this.metadataList.push(
           {
           "key":'qqqq'
-          ,"metadata1":'aaaaaaaaaaaaaaaaaaaa'
+          ,"metadata1":'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
           ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
           ,"case" : '1'
           }
@@ -104,6 +104,8 @@ onClickClearButton() {
   this.stableMetadata = '';
   this.devMetadata ='';
   this.compareFigure='0';
+
+  this.metadataList.length = 0;
 
   this.cdr.detectChanges();
 }
@@ -171,8 +173,14 @@ onClickVerifyButton() {
 
 
 
-
-
+///////////////////////////////////////////////////////// compareFigure 수치 갖고오는것
+      this.verifyMetadataService.getData('https://crix-api-endpoint.upbit.com/v1/crix/candles/minutes/1?code=CRIX.UPBIT.KRW-XRP').subscribe(
+       res => {
+           //console.log(res);
+               this.compareFigure = res;
+               this.cdr.detectChanges();
+         }
+      );
   }
 
 
