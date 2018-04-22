@@ -1,0 +1,38 @@
+
+<div  class ="input-form">
+    <p class="input-form-title">Input Verify Data</p>
+
+      <div class="input-form-elements" >
+          <div style='display:inline;float:left;width:30%' ><label >Image URL</label></div>
+          <div style='display:inline;float:left;width:60%'><input class="input-element1" [(ngModel)]="metadataURL" style="border: 0px;border-bottom: #9B9B9B 1.5px solid; background-color: #FAFAFA;"> </div>
+      </div>
+
+
+      <div class="input-form-button">
+         <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:60px;' (click) = "onClickVerifyButton()">Verify</button>
+         <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:20px;' (click)= "onClickClearButton()">Clear</button>
+      </div>
+
+</div>
+
+
+<div  class ="result-form">
+  <div>
+    <mat-card class="card">
+          <mat-card-header class="card-header">
+              <mat-card-title>Compared Metadata Image</mat-card-title>
+          </mat-card-header>
+
+          <img  mat-card-image  src="{{resizedResultImageURL}}" >
+
+          <mat-card-content>
+            <a href="{{originalCompareMetadataURL}}">
+              Original Image
+            </a>
+            <p>Diff Fiugure : {{comparefigure}}</p>
+          </mat-card-content>
+
+
+    </mat-card>
+  </div>
+</div>

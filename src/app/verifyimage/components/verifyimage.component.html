@@ -9,7 +9,7 @@
       </div>
 
       <div class="input-form-elements" >
-          <div style='display:inline;float:left;width:30%'><label >Transparency : {{transparency}}</label></div>
+          <div style='display:inline;float:left;width:30%'><label >Image transparency : {{transparency}}</label></div>
           <div style='display:inline;float:left;width:60%'> <mat-slider  min="0" max="5" step="1" [(ngModel)]="transparency"class="input-element2"></mat-slider></div>
       </div>
 
@@ -27,10 +27,10 @@
               <mat-card-title>Stable Server Image</mat-card-title>
           </mat-card-header>
 
-          <img  mat-card-image  src="{{stableImageURL}}" >
+          <img  mat-card-image  src="{{resizedStableServerImageURL}}" >
 
           <mat-card-content>
-            <a href="http://www.naver.com">
+            <a href="{{originalStableServerImageURL}}">
               Original Image
             </a>
           </mat-card-content>
@@ -45,9 +45,9 @@
               <mat-card-title>Dev Server Image</mat-card-title>
           </mat-card-header>
 
-          <img  mat-card-image  src="{{devImageURL}}"  >
+          <img  mat-card-image  src="{{resizedDevServerImageURL}}"  >
           <mat-card-content>
-            <a href="http://www.naver.com">
+            <a href="{{originalDevServerImageURL}}">
               Original Image
             </a>
           </mat-card-content>
@@ -63,11 +63,11 @@
               <mat-card-title>Verified Image</mat-card-title>
           </mat-card-header>
 
-          <img mat-card-image src="{{resultImageURL}}"  >
+          <img mat-card-image src="{{resizedResultImageURL}}"  >
 
 
           <mat-card-content>
-            <a href="http://www.naver.com">Original Image</a>
+            <a href="{{originalVerifyImageURL}}">Original Image</a>
             <p>PSNR : {{psnr}}</p>
           </mat-card-content>
 
