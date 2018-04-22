@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div  class ="input-form">
     <p class="input-form-title">Input Verify Data</p>
@@ -17,22 +18,38 @@
 
 
 <div  class ="result-form">
-  <div>
-    <mat-card class="card">
-          <mat-card-header class="card-header">
-              <mat-card-title>Compared Metadata Image</mat-card-title>
-          </mat-card-header>
+    <div style='display:inline;float:left;width:30%;' >
+      <mat-card class="card">
+            <mat-card-header class="card-header">
+                <mat-card-title>Compared Metadata Image</mat-card-title>
+            </mat-card-header>
 
-          <img  mat-card-image  src="{{resizedResultImageURL}}" >
+            <img  mat-card-image  src="{{resizedResultImageURL}}" >
 
-          <mat-card-content>
-            <a href="{{originalCompareMetadataURL}}">
-              Original Image
-            </a>
-            <p>Diff Fiugure : {{comparefigure}}</p>
-          </mat-card-content>
+            <mat-card-content>
+
+              <a href="{{originalCompareMetadataURL}}" style="text-decoration:none;">
+                  Original Image
+              </a>
+              <p>Diff Fiugure : {{comparefigure}}</p>
+            </mat-card-content>
 
 
-    </mat-card>
-  </div>
-</div>
+      </mat-card>
+    </div>
+
+
+        <div class="metadataTextarea1" style='display:block;float:left;width:30%;'>
+          <mat-form-field class="textArea">
+              <textarea style="overflow:auto;" wrap="off" rows="24" readonly matInput placeholder="Dev Server Metadata">{{metadata1}}</textarea>
+          </mat-form-field>
+        </div>
+
+        <div  class="metadataTextarea2"  style='display:block;float:left;width:30%;'>
+          <mat-form-field class="textArea">
+              <textarea style="overflow:auto;" wrap="off" rows="24" readonly  matInput placeholder="Stable Server Metadata">{{metadata2}}</textarea>
+          </mat-form-field>
+        </div>
+
+
+    </div>

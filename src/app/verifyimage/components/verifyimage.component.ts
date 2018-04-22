@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import {Component, Inject, OnInit, OnDestroy,AfterViewInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {VerifyImageService} from '../service/verifyimage.service';
 
@@ -26,6 +26,15 @@ export class VerifyImageComponent  {
     originalVerifyImageURL:string;
     PSNRURL:string;
 
+    constructor(private verifyImageService: VerifyImageService,
+                private cdr: ChangeDetectorRef) {
+}
+
+
+ngOnInit() {
+this.cdr.detectChanges();
+
+}
     onClickClearButton() {
       this.imageURL = '';
       this.transparency = 0;
