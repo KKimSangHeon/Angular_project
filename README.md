@@ -1,4 +1,6 @@
-﻿npm install --save @angular/material
+﻿install list
+
+npm install --save @angular/material
 
 npm install --save @angular/cdk
 
