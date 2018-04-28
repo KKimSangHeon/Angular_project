@@ -25,12 +25,22 @@
       </ng-container>
 
       <ng-container >
+        <mat-list-item (click)="onClickSideMenu('/verifyimagelist');sidenav.close();" >
+          <mat-icon>receipt</mat-icon>
+          <span mat-line><p class="sidenav-subtitle">Verify Image List </p></span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+
+      <ng-container >
         <mat-list-item (click)="onClickSideMenu('/verifymetadata');sidenav.close();" >
           <mat-icon>receipt</mat-icon>
           <span mat-line><p class="sidenav-subtitle">Verify Metadata </p></span>
           <mat-divider></mat-divider>
         </mat-list-item>
       </ng-container>
+
+
 </mat-nav-list>
 
     </mat-list>

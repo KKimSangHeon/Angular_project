@@ -1,6 +1,10 @@
-import {Component, Inject, OnInit, OnDestroy,ChangeDetectorRef,AfterViewInit} from '@angular/core';
+import {Component, Inject, OnInit, OnDestroy,ChangeDetectorRef,AfterViewInit,NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {Router} from '@angular/router';
 import {VerifyMetadataService} from '../service/verifymetadata.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-verifymetadata',
@@ -26,12 +30,70 @@ compareFigure:string='0';
 devMetadata:string= '';
 stableMetadata:string = '';
 
+metadata1Data = [];
+items:Object[] = [];
+metadataList = [];
+
 constructor(private verifyMetadataService: VerifyMetadataService,
             private cdr: ChangeDetectorRef) {
 }
 
 ngOnInit() {
       this.cdr.detectChanges();
+
+      this.metadataList.push(
+        {
+        "key":'qqqq'
+        ,"metadata1":'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
+        ,"metadata2": 'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
+        ,"case" : '1'
+        }
+      )
+        this.metadataList.push(
+          {
+          "key":'qqqq'
+          ,"metadata1":'aaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccaaaa'
+          ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
+          ,"case" : '1'
+          }
+        );
+
+        this.metadataList.push(
+          {
+          "key":'qqqq'
+
+          ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
+          ,"case" : '3'
+          }
+        );
+        this.metadataList.push(
+          {
+          "key":'qqqq'
+
+          ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
+          ,"case" : '3'
+          }
+        );
+        this.metadataList.push(
+          {
+          "key":'qqqq'
+          ,"metadata1":'aaaaaaaaaaaaaaaaaaaa'
+          ,"metadata2": 'bbbbbbbbbbbbbbbbbbbb'
+          ,"case" : '2'
+          }
+        );
+        this.metadataList.push(
+          {
+          "key":'qqqq'
+          ,"metadata1":'aaaaaaaaaaaaaaaaaaaa'
+
+          ,"case" : '4'
+          }
+        );
+
+
+
+
 
 }
 
@@ -42,6 +104,8 @@ onClickClearButton() {
   this.stableMetadata = '';
   this.devMetadata ='';
   this.compareFigure='0';
+
+  this.metadataList.length = 0;
 
   this.cdr.detectChanges();
 }
@@ -68,42 +132,78 @@ onClickVerifyButton() {
 
 
 
-    this.verifyMetadataService.getData(this.originalDevServerMetadataURL).subscribe(
-    res => {
-        console.log(res);
-            this.devMetadata = res['_body'];
-            this.cdr.detectChanges();
-      },
-    err => {
-        this.devMetadata ='get metadata err';
-        console.log(err);
+
+
+      this.verifyMetadataService.getData('https://crix-api-endpoint.upbit.com/v1/crix/candles/minutes/1?code=CRIX.UPBIT.KRW-ADA').subscribe(
+       res => {
+           //console.log(res);
+               this.devMetadata = res;
+               this.cdr.detectChanges();
+
+
+///////////////////////////////////////////////////////// 2번째 메타데이터 수신
+               this.verifyMetadataService.getData('https://crix-api-endpoint.upbit.com/v1/crix/candles/minutes/1?code=CRIX.UPBIT.KRW-XRP').subscribe(
+                res => {
+                    //console.log(res);
+                        this.stableMetadata = res;
+                        this.cdr.detectChanges();
+
+
+                        console.log(this.devMetadata);
+                              console.log(this.stableMetadata);
+                         console.log(this.difference(this.devMetadata,this.stableMetadata));
+                         console.log(this.equals(this.devMetadata,this.stableMetadata));
+                         console.log(this.difference(this.stableMetadata,this.devMetadata));
+
+
+
+                  },
+                err => {
+                    this.devMetadata ='get metadata err';
+                    console.log(err);
+                }
+               );
+/////////////////////////////////////////////////////////
+         },
+       err => {
+           this.devMetadata ='get metadata err';
+           console.log(err);
+       }
+      );
+
+
+
+///////////////////////////////////////////////////////// compareFigure 수치 갖고오는것
+      this.verifyMetadataService.getData('https://crix-api-endpoint.upbit.com/v1/crix/candles/minutes/1?code=CRIX.UPBIT.KRW-XRP').subscribe(
+       res => {
+           //console.log(res);
+               this.compareFigure = res;
+               this.cdr.detectChanges();
+         }
+      );
+  }
+
+
+difference(object, base) {
+  	function changes(object, base) {
+  		return _.transform(object, function(result, value, key) {
+  			if (!_.isEqual(value, base[key])) {
+  				result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+  			}
+  		});
+  	}
+  	return changes(object, base);
+}
+
+equals(object, base) {
+    function changes(object, base) {
+      return _.transform(object, function(result, value, key) {
+        if (_.isEqual(value, base[key])) {
+          result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+        }
+      });
     }
-  );
+    return changes(object, base);
+}
 
-  this.verifyMetadataService.getData(this.originalStableServerMetadataURL).subscribe(
-  res => {
-      console.log(res);
-      this.stableMetadata = res['_body'];
-      this.cdr.detectChanges();
-    },
-  err => {
-      this.stableMetadata ='get metadata err';
-      console.log(err);
-  }
-);
-
-this.verifyMetadataService.getData(this.compareFigureURL).subscribe(
-  res => {
-      console.log(res);
-      this.compareFigure = res['_body'];
-      this.cdr.detectChanges();
-    },
-  err => {
-      this.compareFigure ='get compareFigure err';
-      console.log(err);
-  }
-);
-
-
-  }
 }

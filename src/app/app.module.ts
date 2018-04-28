@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import {Route} from './app.route';
 import {SharedModule} from './shared/shared.module';
 import {VerifyImageModule} from './verifyimage/verifyimage.module';
+import {VerifyImageListModule} from './verifyimagelist/verifyimagelist.module';
 import {VerifyMetadataModule} from './verifymetadata/verifymetadata.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import {VerifyMetadataModule} from './verifymetadata/verifymetadata.module';
   imports: [
     BrowserModule,
     VerifyImageModule,
+    VerifyImageListModule,
     VerifyMetadataModule,
     Route,
     SharedModule,
