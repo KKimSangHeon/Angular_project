@@ -16,7 +16,7 @@ export class VerifyImageListComponent implements OnInit {
 
     //dataSource = ELEMENT_DATA;
 
-     @Input() dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+     @Input() dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
     filsText:string;
     transparency = 3;
     imageURL:string = '';
@@ -24,14 +24,6 @@ export class VerifyImageListComponent implements OnInit {
 
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
 
-    resizedStableServerImageURL:string = this.defaultImageURL;
-    resizedDevServerImageURL:string = this.defaultImageURL;
-    resizedResultImageURL:string = this.defaultImageURL;
-    originalStableServerImageURL:string;
-    originalDevServerImageURL:string;
-    originalVerifyImageURL:string;
-    PSNRURL:string = '';
-    psnr:string = '0';
     constructor(private verifyImageListService: VerifyImageListService,
                 private cdr: ChangeDetectorRef) {
 }
@@ -45,15 +37,7 @@ onClickClearButton() {
 
       this.initData();
 
-      this.imageURL = '';
-      this.transparency = 0;
-      this.resizedStableServerImageURL = this.defaultImageURL;
-      this.resizedDevServerImageURL = this.defaultImageURL;
-      this.resizedResultImageURL = this.defaultImageURL;
 
-      this.originalStableServerImageURL = '';
-      this.originalDevServerImageURL = '';
-      this.originalVerifyImageURL = '';
 
 }
 
@@ -71,32 +55,45 @@ onClickVerifyButton() {
 
           this.PSNRURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=figure';
 
-
-            아래 7줄 지우기
       */
-      this.resizedStableServerImageURL = this.imageURL;
-      this.resizedDevServerImageURL = this.imageURL;
-      this.resizedResultImageURL = this.imageURL;
-      this.originalStableServerImageURL = this.resizedStableServerImageURL;
-      this.originalDevServerImageURL = this.resizedStableServerImageURL;
-      this.originalVerifyImageURL = this.resizedStableServerImageURL;
-      this.PSNRURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+      var counter = 1;
+      RESULT_ELEMENT_DATA.length = 0;
+
+      for(var i =0 ; i<ELEMENT_DATA.length;i++) {
+        let resizedStableServerImageURL = ELEMENT_DATA[i]['resizedStableServerImageURL'];
+        let resizedDevServerImageURL = ELEMENT_DATA[i]['resizedDevServerImageURL'];
+        let resizedResultImageURL = ELEMENT_DATA[i]['resizedResultImageURL'];
+
+        let originalStableServerImageURL = ELEMENT_DATA[i]['originalStableServerImageURL'];
+        let originalResultImageURL = ELEMENT_DATA[i]['originalResultImageURL'];
+        let originalDevServerImageURL =ELEMENT_DATA[i]['originalDevServerImageURL'];
 
 
+          this.verifyImageListService.getPSNR(ELEMENT_DATA[i]['psnrURL']).subscribe(
+          res => {
+              let psnr = res['_body'];
 
-      this.dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+              RESULT_ELEMENT_DATA.push({no : counter++,
+                                          resizedStableServerImageURL: resizedStableServerImageURL,
+                                          resizedDevServerImageURL: resizedDevServerImageURL,
+                                          resizedResultImageURL: resizedResultImageURL,
+                                          originalStableServerImageURL: originalStableServerImageURL,
+                                          originalDevServerImageURL: originalDevServerImageURL,
+                                          originalResultImageURL: originalResultImageURL,
+                                          psnr: psnr ,
+                                          psnrURL:''});
 
-      this.verifyImageListService.getPSNR(this.PSNRURL).subscribe(
-      res => {
-          console.log(res);
-              this.psnr = res['_body'];
+           this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
+            },
+          err => {
 
-        },
-      err => {
-          this.psnr ='getPSNR err';
-          console.log(err);
+              console.log(err);
+          }
+        );
+
+
       }
-    );
+
 
 }
 
@@ -111,9 +108,16 @@ fileUpload(event) {
         ELEMENT_DATA.length = 0;
     for(var i=0; i<splitted.length;i++) {
         var psnr = "33";
-
-        ELEMENT_DATA.push({no : i+1, resizedStableServerImageURL: splitted[i], resizedDevServerImageURL: splitted[i], resizedResultImageURL: splitted[i], psnr: psnr });
-
+          var psnrURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+        ELEMENT_DATA.push({no : i+1,
+                        resizedStableServerImageURL: splitted[i],
+                        resizedDevServerImageURL: splitted[i],
+                        resizedResultImageURL: splitted[i],
+                        originalStableServerImageURL: splitted[i],
+                        originalDevServerImageURL: splitted[i],
+                        originalResultImageURL:splitted[i],
+                        psnr: psnr ,
+                        psnrURL:psnrURL});
       }
     }
   }
@@ -121,21 +125,34 @@ fileUpload(event) {
 
   initData() {
         this.dataSource = new MatTableDataSource<Element>(INIT_DATA);
+
       }
 }
-
 
 export interface Element {
   no: number;
   resizedStableServerImageURL: string;
   resizedDevServerImageURL: string;
   resizedResultImageURL: string;
-  psnr: string;
+  originalStableServerImageURL: string;
+  originalDevServerImageURL: string;
+  originalResultImageURL: string;
+  psnrURL:string;
+  psnr: any;
 }
 
-const ELEMENT_DATA: Element[] = [
+const ELEMENT_DATA: Element[] = [];
 
-];
+const RESULT_ELEMENT_DATA: Element[] = [];
+
 const INIT_DATA: Element[] = [
-    {no : 1, resizedStableServerImageURL: "http://www.hondahookup.com/images/100x100.jpg", resizedDevServerImageURL: "http://www.hondahookup.com/images/100x100.jpg", resizedResultImageURL: "http://www.hondahookup.com/images/100x100.jpg", psnr: "0" }
+    {no : 1,
+    resizedStableServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+    resizedDevServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+    resizedResultImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+    originalStableServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+    originalDevServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+    originalResultImageURL: "http://www.hondahookup.com/images/100x100.jpg",
+
+    psnrURL:"aaa",psnr: "0" }
 ];
