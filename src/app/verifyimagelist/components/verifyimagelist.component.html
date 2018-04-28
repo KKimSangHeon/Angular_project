@@ -1,0 +1,67 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div  class ="input-form">
+    <p class="input-form-title">Input Verify Data</p>
+
+      <div class="input-form-elements" >
+          <div style='display:inline;float:left;width:30%' ><label >TXT File</label></div>
+          <input id="file-upload"  type="file"   accept=".txt"  (change)="fileUpload($event)">
+
+      </div>
+
+      <div class="input-form-elements" >
+          <div style='display:inline;float:left;width:30%'><label >Image transparency : {{transparency}}</label></div>
+          <div style='display:inline;float:left;width:60%'> <mat-slider  min="0" max="5" step="1" [(ngModel)]="transparency"class="input-element2"></mat-slider></div>
+      </div>
+
+      <div class="input-form-button">
+       <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:60px;' (click) = "onClickVerifyButton()">Verify</button>
+       <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:20px;' (click)="onClickClearButton()">Clear</button>
+      </div>
+</div>
+
+
+<div  class ="result-form">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+
+      <ng-container matColumnDef="no">
+        <mat-header-cell *matHeaderCellDef fxFlex="30%"> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="30%"> {{element.no}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="resizedStableServerImageURL">
+        <mat-header-cell *matHeaderCellDef> StableServer </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <img width="80" height="80" src={{element.resizedStableServerImageURL}}> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="resizedDevServerImageURL">
+        <mat-header-cell *matHeaderCellDef> DevServer </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <img width="80" height="80" src={{element.resizedDevServerImageURL}}> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="resizedResultImageURL">
+        <mat-header-cell *matHeaderCellDef> Verified Image </mat-header-cell>
+        <mat-cell *matCellDef="let element"><img width="80" height="80" src={{element.resizedResultImageURL}}> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="psnr">
+        <mat-header-cell *matHeaderCellDef> PSNR </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.psnr}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+
+</div>
