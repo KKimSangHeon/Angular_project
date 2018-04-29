@@ -43,7 +43,7 @@ onClickClearButton() {
 }
 
 onClickVerifyButton() {
-    this.initData();
+
 
 
       var counter = 1;
@@ -107,6 +107,8 @@ onClickVerifyButton() {
 
 
           }
+                  ELEMENT_DATA.length = 0;
+                  RESULT_ELEMENT_DATA.length =0;
 }
 
 
