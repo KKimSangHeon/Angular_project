@@ -30,7 +30,7 @@ export class VerifyImageComponent  {
     originalVerifyImageURL:string;
     PSNRURL:string = '';
     psnr:string = '0';
-    resize:string ='modify=resize&width=100&height=100';
+    resize:string ='modify=resize&width=200&height=200';
     constructor(private verifyImageService: VerifyImageService,
                 private cdr: ChangeDetectorRef) {
 }
