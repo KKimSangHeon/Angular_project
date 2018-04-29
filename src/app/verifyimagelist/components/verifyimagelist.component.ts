@@ -61,7 +61,7 @@ onClickVerifyButton() {
             let psnr;
             let originalVerifyImageURL;
 
-            PSNRURL = this.serverURL+ '?src=&amp;' +PSNRURL+'&amp;&method=verify&resType=figure';
+            PSNRURL = this.serverURL+ '?src=&amp;' +PSNRURL+'&amp;&action=verify&resType=figure';
             resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +resizedStableServerImageURL+'&amp;&action=delivery&server=stable&size=200x200&transparency='+this.transparency;
             resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +resizedDevServerImageURL+'&amp;&action=delivery&server=dev&size=200x200&transparency='+this.transparency;
             resizedResultImageURL = this.serverURL+ '?src=&amp;' +resizedResultImageURL+'&amp;&action=verify&size=200x200&transparency='+this.transparency;
@@ -71,26 +71,41 @@ onClickVerifyButton() {
             originalVerifyImageURL = this.serverURL+ '?src=&amp;' +originalDevServerImageURL+'&amp;&action=verify&resType=image&transparency='+this.transparency;
 
 
-            this.verifyImageListService.getPSNR(ELEMENT_DATA[i]['psnrURL']).subscribe(
+            console.log(PSNRURL);
+
+            this.verifyImageListService.getPSNR(PSNRURL).subscribe(
             res => {
                 psnr = res['_body'];
+
+                RESULT_ELEMENT_DATA.push({no : counter++,
+                                            resizedStableServerImageURL: resizedStableServerImageURL,
+                                            resizedDevServerImageURL: resizedDevServerImageURL,
+                                            resizedResultImageURL: resizedResultImageURL,
+                                            originalStableServerImageURL: originalStableServerImageURL,
+                                            originalDevServerImageURL: originalDevServerImageURL,
+                                            originalResultImageURL: originalResultImageURL,
+                                            psnr: psnr ,
+                                            psnrURL:''});
+              this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
             },
             err => {
                 psnr ='error';
                 console.log(err);
+                RESULT_ELEMENT_DATA.push({no : counter++,
+                                            resizedStableServerImageURL: resizedStableServerImageURL,
+                                            resizedDevServerImageURL: resizedDevServerImageURL,
+                                            resizedResultImageURL: resizedResultImageURL,
+                                            originalStableServerImageURL: originalStableServerImageURL,
+                                            originalDevServerImageURL: originalDevServerImageURL,
+                                            originalResultImageURL: originalResultImageURL,
+                                            psnr: psnr ,
+                                            psnrURL:''});
+                this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
             });
 
-            RESULT_ELEMENT_DATA.push({no : counter++,
-                                        resizedStableServerImageURL: resizedStableServerImageURL,
-                                        resizedDevServerImageURL: resizedDevServerImageURL,
-                                        resizedResultImageURL: resizedResultImageURL,
-                                        originalStableServerImageURL: originalStableServerImageURL,
-                                        originalDevServerImageURL: originalDevServerImageURL,
-                                        originalResultImageURL: originalResultImageURL,
-                                        psnr: psnr ,
-                                        psnrURL:''});
 
-            this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
+
+
           }
 }
 
