@@ -20,7 +20,8 @@ export class VerifyImageListComponent implements OnInit {
     filsText:string;
     transparency = 3;
     imageURL:string = '';
-    serverURL:string = '10.22222222222222.com';
+    serverURL:string = 'http://10.106.151.156/verify';
+        resize:string ='modify=resize&width=100&height=100';
 
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
 
@@ -44,57 +45,53 @@ onClickClearButton() {
 onClickVerifyButton() {
     this.initData();
 
-      /*
-          this.resizedStableServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=stable&size=200x200&transparency='+this.transparency;
-          this.resizedDevServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=dev&size=200x200&transparency='+this.transparency;
-          this.resizedResultImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&size=200x200&transparency='+this.transparency;
 
-          this.originalStableServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=stable&transparency='+this.transparency;
-          this.originalDevServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=dev&transparency='+this.transparency;
-          this.originalVerifyImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=image&transparency='+this.transparency;
-
-          this.PSNRURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=figure';
-
-      */
       var counter = 1;
       RESULT_ELEMENT_DATA.length = 0;
 
       for(var i =0 ; i<ELEMENT_DATA.length;i++) {
-        let resizedStableServerImageURL = ELEMENT_DATA[i]['resizedStableServerImageURL'];
-        let resizedDevServerImageURL = ELEMENT_DATA[i]['resizedDevServerImageURL'];
-        let resizedResultImageURL = ELEMENT_DATA[i]['resizedResultImageURL'];
+            let resizedStableServerImageURL = ELEMENT_DATA[i]['resizedStableServerImageURL'];
+            let resizedDevServerImageURL = ELEMENT_DATA[i]['resizedDevServerImageURL'];
+            let resizedResultImageURL = ELEMENT_DATA[i]['resizedResultImageURL'];
 
-        let originalStableServerImageURL = ELEMENT_DATA[i]['originalStableServerImageURL'];
-        let originalResultImageURL = ELEMENT_DATA[i]['originalResultImageURL'];
-        let originalDevServerImageURL =ELEMENT_DATA[i]['originalDevServerImageURL'];
+            let originalStableServerImageURL = ELEMENT_DATA[i]['originalStableServerImageURL'];
+            let originalResultImageURL = ELEMENT_DATA[i]['originalResultImageURL'];
+            let originalDevServerImageURL =ELEMENT_DATA[i]['originalDevServerImageURL'];
+            let PSNRURL=ELEMENT_DATA[i]['psnrURL'];
+            let psnr;
+            let originalVerifyImageURL;
+
+            PSNRURL = this.serverURL+ '?src=&amp;' +PSNRURL+'&amp;&method=verify&resType=figure';
+            resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +resizedStableServerImageURL+'&amp;&action=delivery&server=stable&size=200x200&transparency='+this.transparency;
+            resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +resizedDevServerImageURL+'&amp;&action=delivery&server=dev&size=200x200&transparency='+this.transparency;
+            resizedResultImageURL = this.serverURL+ '?src=&amp;' +resizedResultImageURL+'&amp;&action=verify&size=200x200&transparency='+this.transparency;
+
+            originalStableServerImageURL = this.serverURL+ '?src=&amp;' +originalStableServerImageURL+'&amp;&action=delivery&server=stable&transparency='+this.transparency;
+            originalDevServerImageURL = this.serverURL+ '?src=&amp;' +originalResultImageURL+'&amp;&action=delivery&server=dev&transparency='+this.transparency;
+            originalVerifyImageURL = this.serverURL+ '?src=&amp;' +originalDevServerImageURL+'&amp;&action=verify&resType=image&transparency='+this.transparency;
 
 
-          this.verifyImageListService.getPSNR(ELEMENT_DATA[i]['psnrURL']).subscribe(
-          res => {
-              let psnr = res['_body'];
-
-              RESULT_ELEMENT_DATA.push({no : counter++,
-                                          resizedStableServerImageURL: resizedStableServerImageURL,
-                                          resizedDevServerImageURL: resizedDevServerImageURL,
-                                          resizedResultImageURL: resizedResultImageURL,
-                                          originalStableServerImageURL: originalStableServerImageURL,
-                                          originalDevServerImageURL: originalDevServerImageURL,
-                                          originalResultImageURL: originalResultImageURL,
-                                          psnr: psnr ,
-                                          psnrURL:''});
-
-           this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
+            this.verifyImageListService.getPSNR(ELEMENT_DATA[i]['psnrURL']).subscribe(
+            res => {
+                psnr = res['_body'];
             },
-          err => {
+            err => {
+                psnr ='error';
+                console.log(err);
+            });
 
-              console.log(err);
+            RESULT_ELEMENT_DATA.push({no : counter++,
+                                        resizedStableServerImageURL: resizedStableServerImageURL,
+                                        resizedDevServerImageURL: resizedDevServerImageURL,
+                                        resizedResultImageURL: resizedResultImageURL,
+                                        originalStableServerImageURL: originalStableServerImageURL,
+                                        originalDevServerImageURL: originalDevServerImageURL,
+                                        originalResultImageURL: originalResultImageURL,
+                                        psnr: psnr ,
+                                        psnrURL:''});
+
+            this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
           }
-        );
-
-
-      }
-
-
 }
 
 
@@ -117,7 +114,7 @@ fileUpload(event) {
                         originalDevServerImageURL: splitted[i],
                         originalResultImageURL:splitted[i],
                         psnr: psnr ,
-                        psnrURL:psnrURL});
+                        psnrURL:splitted[i]});
       }
     }
   }

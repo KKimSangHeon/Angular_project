@@ -14,7 +14,11 @@ export class VerifyImageComponent  {
 
     transparency = 3;
     imageURL:string = '';
-    serverURL:string = '10.22222222222222.com';
+    serverURL:string = 'http://10.106.151.156/verify';
+
+
+
+
 
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
 
@@ -26,6 +30,7 @@ export class VerifyImageComponent  {
     originalVerifyImageURL:string;
     PSNRURL:string = '';
     psnr:string = '0';
+    resize:string ='modify=resize&width=100&height=100';
     constructor(private verifyImageService: VerifyImageService,
                 private cdr: ChangeDetectorRef) {
 }
@@ -51,29 +56,18 @@ this.cdr.detectChanges();
     onClickVerifyButton() {
 
 
-      /*
-          this.resizedStableServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=stable&size=200x200&transparency='+this.transparency;
-          this.resizedDevServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=dev&size=200x200&transparency='+this.transparency;
-          this.resizedResultImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&size=200x200&transparency='+this.transparency;
 
-          this.originalStableServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=stable&transparency='+this.transparency;
-          this.originalDevServerImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=delivery&server=dev&transparency='+this.transparency;
-          this.originalVerifyImageURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=image&transparency='+this.transparency;
+          this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize+'&transparency='+this.transparency;
+          this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize+'&transparency='+this.transparency;
+          this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparency='+this.transparency;
 
-          this.PSNRURL = this.serverURL+ '?fileAddress=' +this.imageURL+'&method=verify&resType=figure';
+          this.originalStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&transparency='+this.transparency;
+          this.originalDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&transparency='+this.transparency;
+          this.originalVerifyImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparency='+this.transparency;
 
+          this.PSNRURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=figure';
 
-            아래 7줄 지우기
-      */
-      this.resizedStableServerImageURL = this.imageURL;
-      this.resizedDevServerImageURL = this.imageURL;
-      this.resizedResultImageURL = this.imageURL;
-      this.originalStableServerImageURL = this.resizedStableServerImageURL;
-      this.originalDevServerImageURL = this.resizedStableServerImageURL;
-      this.originalVerifyImageURL = this.resizedStableServerImageURL;
-      this.PSNRURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
-
-
+          console.log(this.PSNRURL);
 
       this.verifyImageService.getPSNR(this.PSNRURL).subscribe(
       res => {
@@ -82,7 +76,7 @@ this.cdr.detectChanges();
 
         },
       err => {
-          this.psnr ='getPSNR err';
+          this.psnr ='error';
           console.log(err);
       }
     );
