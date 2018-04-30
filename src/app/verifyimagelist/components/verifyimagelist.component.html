@@ -38,19 +38,19 @@
 
       <ng-container matColumnDef="resizedStableServerImageURL">
         <mat-header-cell *matHeaderCellDef> StableServer </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a href={{element.originalStableServerImageURL}}> <img width="80" height="80" src={{element.resizedStableServerImageURL}}></a> </mat-cell>
+        <mat-cell *matCellDef="let element"> <a href={{element.originalStableServerImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedStableServerImageURL}}></a> </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="resizedDevServerImageURL">
         <mat-header-cell *matHeaderCellDef> DevServer </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a href={{element.originalDevServerImageURL}}>  <img width="80" height="80" src={{element.resizedDevServerImageURL}}></a> </mat-cell>
+        <mat-cell *matCellDef="let element"> <a href={{element.originalDevServerImageURL}} target="_blank">  <img width="80" height="80" src={{element.resizedDevServerImageURL}}></a> </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="resizedResultImageURL">
         <mat-header-cell *matHeaderCellDef> Verified Image </mat-header-cell>
-        <mat-cell *matCellDef="let element">  <a href={{element.resizedResultImageURL}}> <img width="80" height="80" src={{element.resizedResultImageURL}}></a> </mat-cell>
+        <mat-cell *matCellDef="let element">  <a href={{element.resizedResultImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedResultImageURL}}></a> </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="psnr">
