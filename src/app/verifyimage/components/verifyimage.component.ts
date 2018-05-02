@@ -12,7 +12,7 @@ import {VerifyImageService} from '../service/verifyimage.service';
 })
 export class VerifyImageComponent  {
 
-    transparency = 3;
+    transparent = 3;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
 
@@ -42,7 +42,7 @@ this.cdr.detectChanges();
 }
     onClickClearButton() {
       this.imageURL = '';
-      this.transparency = 0;
+      this.transparent = 0;
       this.resizedStableServerImageURL = this.defaultImageURL;
       this.resizedDevServerImageURL = this.defaultImageURL;
       this.resizedResultImageURL = this.defaultImageURL;
@@ -57,13 +57,13 @@ this.cdr.detectChanges();
 
 
 
-          this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize+'&transparency='+this.transparency;
-          this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize+'&transparency='+this.transparency;
-          this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparency='+this.transparency;
+          this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize+'&transparent='+this.transparent;
+          this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize+'&transparent='+this.transparent;
+          this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
 
-          this.originalStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&transparency='+this.transparency;
-          this.originalDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&transparency='+this.transparency;
-          this.originalVerifyImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparency='+this.transparency;
+          this.originalStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&transparent='+this.transparent;
+          this.originalDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&transparent='+this.transparent;
+          this.originalVerifyImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent;
 
           this.PSNRURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=figure';
 

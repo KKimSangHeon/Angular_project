@@ -18,7 +18,7 @@ export class VerifyImageListComponent implements OnInit {
 
      @Input() dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
     filsText:string;
-    transparency = 3;
+    transparent = 3;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
         resize:string ='modify=resize&width=100&height=100';
@@ -62,13 +62,13 @@ onClickVerifyButton() {
             let originalVerifyImageURL;
 
             PSNRURL = this.serverURL+ '?src=&amp;' +PSNRURL+'&amp;&action=verify&resType=figure';
-            resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +resizedStableServerImageURL+'&amp;&action=delivery&server=stable&size=200x200&transparency='+this.transparency;
-            resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +resizedDevServerImageURL+'&amp;&action=delivery&server=dev&size=200x200&transparency='+this.transparency;
-            resizedResultImageURL = this.serverURL+ '?src=&amp;' +resizedResultImageURL+'&amp;&action=verify&size=200x200&transparency='+this.transparency;
+            resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +resizedStableServerImageURL+'&amp;&action=delivery&server=stable&size=200x200&transparent='+this.transparent;
+            resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +resizedDevServerImageURL+'&amp;&action=delivery&server=dev&size=200x200&transparent='+this.transparent;
+            resizedResultImageURL = this.serverURL+ '?src=&amp;' +resizedResultImageURL+'&amp;&action=verify&size=200x200&transparent='+this.transparent;
 
-            originalStableServerImageURL = this.serverURL+ '?src=&amp;' +originalStableServerImageURL+'&amp;&action=delivery&server=stable&transparency='+this.transparency;
-            originalDevServerImageURL = this.serverURL+ '?src=&amp;' +originalResultImageURL+'&amp;&action=delivery&server=dev&transparency='+this.transparency;
-            originalVerifyImageURL = this.serverURL+ '?src=&amp;' +originalDevServerImageURL+'&amp;&action=verify&resType=image&transparency='+this.transparency;
+            originalStableServerImageURL = this.serverURL+ '?src=&amp;' +originalStableServerImageURL+'&amp;&action=delivery&server=stable&transparent='+this.transparent;
+            originalDevServerImageURL = this.serverURL+ '?src=&amp;' +originalResultImageURL+'&amp;&action=delivery&server=dev&transparent='+this.transparent;
+            originalVerifyImageURL = this.serverURL+ '?src=&amp;' +originalDevServerImageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent;
 
 
             console.log(PSNRURL);
@@ -121,8 +121,8 @@ fileUpload(event) {
 
         ELEMENT_DATA.length = 0;
     for(var i=0; i<splitted.length;i++) {
-        var psnr = "33";
-          var psnrURL = 'http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D';
+        var psnr = "0";
+
         ELEMENT_DATA.push({no : i+1,
                         resizedStableServerImageURL: splitted[i],
                         resizedDevServerImageURL: splitted[i],
