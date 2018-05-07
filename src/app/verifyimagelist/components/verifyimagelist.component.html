@@ -50,7 +50,7 @@
 
       <ng-container matColumnDef="resizedResultImageURL">
         <mat-header-cell *matHeaderCellDef> Verified Image </mat-header-cell>
-        <mat-cell *matCellDef="let element">  <a href={{element.resizedResultImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedResultImageURL}}></a> </mat-cell>
+        <mat-cell *matCellDef="let element">  <a href={{element.originalResultImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedResultImageURL}}></a> </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="psnr">

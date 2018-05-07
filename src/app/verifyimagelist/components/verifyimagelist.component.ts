@@ -21,7 +21,7 @@ export class VerifyImageListComponent implements OnInit {
     transparent = 3;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
-        resize:string ='modify=resize&width=100&height=100';
+    resize:string ='modify=resize&width=100&height=100';
 
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
 
@@ -50,25 +50,27 @@ onClickVerifyButton() {
       RESULT_ELEMENT_DATA.length = 0;
 
       for(var i =0 ; i<ELEMENT_DATA.length;i++) {
+            let url = ELEMENT_DATA[i]['originalResultImageURL'];
+
             let resizedStableServerImageURL = ELEMENT_DATA[i]['resizedStableServerImageURL'];
             let resizedDevServerImageURL = ELEMENT_DATA[i]['resizedDevServerImageURL'];
             let resizedResultImageURL = ELEMENT_DATA[i]['resizedResultImageURL'];
 
-            let originalStableServerImageURL = ELEMENT_DATA[i]['originalStableServerImageURL'];
-            let originalResultImageURL = ELEMENT_DATA[i]['originalResultImageURL'];
-            let originalDevServerImageURL =ELEMENT_DATA[i]['originalDevServerImageURL'];
-            let PSNRURL=ELEMENT_DATA[i]['psnrURL'];
+            let originalStableServerImageURL ;
+            let originalResultImageURL;
+            let originalDevServerImageURL;
+            let PSNRURL;
             let psnr;
-            let originalVerifyImageURL;
 
-            PSNRURL = this.serverURL+ '?src=&amp;' +PSNRURL+'&amp;&action=verify&resType=figure';
-            resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +resizedStableServerImageURL+'&amp;&action=delivery&server=stable&'+this.resize;
-            resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +resizedDevServerImageURL+'&amp;&action=delivery&server=dev&'+this.resize;
-            resizedResultImageURL = this.serverURL+ '?src=&amp;' +resizedResultImageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
 
-            originalStableServerImageURL = this.serverURL+ '?src=&amp;' +originalStableServerImageURL+'&amp;&action=delivery&server=stable';
-            originalDevServerImageURL = this.serverURL+ '?src=&amp;' +originalResultImageURL+'&amp;&action=delivery&server=dev';
-            originalVerifyImageURL = this.serverURL+ '?src=&amp;' +originalDevServerImageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent;
+            PSNRURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=figure';
+            resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable&'+this.resize;
+            resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev&'+this.resize;
+            resizedResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
+
+            originalStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable';
+            originalDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev';
+            originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent;
 
 
             console.log(PSNRURL);
