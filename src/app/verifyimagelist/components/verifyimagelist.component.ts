@@ -161,14 +161,16 @@ const ELEMENT_DATA: Element[] = [];
 
 const RESULT_ELEMENT_DATA: Element[] = [];
 
+const defaultURL = "http://www.hondahookup.com/images/100x100.jpg";
+
 const INIT_DATA: Element[] = [
     {no : 1,
-    resizedStableServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-    resizedDevServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-    resizedResultImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-    originalStableServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-    originalDevServerImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-    originalResultImageURL: "http://www.hondahookup.com/images/100x100.jpg",
-
-    psnrURL:"aaa",psnr: "0" }
+    resizedStableServerImageURL: defaultURL,
+    resizedDevServerImageURL: defaultURL,
+    resizedResultImageURL: defaultURL,
+    originalStableServerImageURL: defaultURL,
+    originalDevServerImageURL: defaultURL,
+    originalResultImageURL: defaultURL,
+    psnrURL:"",
+    psnr: "0" }
 ];
