@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, OnDestroy,AfterViewInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {VerifyImageService} from '../service/verifyimage.service';
-
+import {SharedService} from '../../shared/shared.service';
 
 
 
@@ -16,11 +16,8 @@ export class VerifyImageComponent  {
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
 
-
-
-
-
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
+    errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
 
     resizedStableServerImageURL:string = this.defaultImageURL;
     resizedDevServerImageURL:string = this.defaultImageURL;
@@ -32,6 +29,7 @@ export class VerifyImageComponent  {
     psnr:string = '0';
     resize:string ='modify=resize&width=200&height=200';
     constructor(private verifyImageService: VerifyImageService,
+                private sharedService: SharedService,
                 private cdr: ChangeDetectorRef) {
 }
 
@@ -54,9 +52,6 @@ this.cdr.detectChanges();
     }
 
     onClickVerifyButton() {
-
-
-
           this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize+'&transparent='+this.transparent;
           this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize+'&transparent='+this.transparent;
           this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
@@ -67,13 +62,15 @@ this.cdr.detectChanges();
 
           this.PSNRURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=figure';
 
-          console.log(this.PSNRURL);
 
       this.verifyImageService.getPSNR(this.PSNRURL).subscribe(
       res => {
-          console.log(res);
-              this.psnr = res['_body'];
-
+              if(res['status'] == 'fail') {
+                      this.resizedResultImageURL = this.errorImageURL;
+                      this.psnr =  this.sharedService.decodeErrorCode(res['error_code']);
+              } else {
+                      this.psnr =  this.sharedService.decodeResultCode(res);
+            }
         },
       err => {
           this.psnr ='error';

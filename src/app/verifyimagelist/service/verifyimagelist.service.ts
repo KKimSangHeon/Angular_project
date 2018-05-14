@@ -13,7 +13,7 @@ export class VerifyImageListService {
 
   getPSNR(URL:string): Observable<any> {
     return this.http.get(URL)
-    .map(response => response);
+    .map(response => response.json());
   }
 
 }

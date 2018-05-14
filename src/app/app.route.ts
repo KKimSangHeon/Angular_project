@@ -41,17 +41,7 @@ const appRoutes: Routes = [
         }
       }
     },
-    {
-      path: 'verifymetadata',
-      component: VerifyMetadataComponent,
-      data: {
-        nav: {
-          name: 'verifyImageList',
-          comment: '메타데이터 검증',
-          icon: 'dashboard',
-        }
-      }
-    },
+
   ]
   }
 

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit, OnDestroy,AfterViewInit,ChangeDetectorRef,Inp
 import {Router} from '@angular/router';
 import {VerifyImageListService} from '../service/verifyimagelist.service';
 import { MatTableDataSource} from '@angular/material';
-
+import {SharedService} from '../../shared/shared.service';
 
 
 @Component({
@@ -12,40 +12,29 @@ import { MatTableDataSource} from '@angular/material';
 })
 export class VerifyImageListComponent implements OnInit {
 
-  displayedColumns = ['no', 'resizedStableServerImageURL', 'resizedDevServerImageURL', 'resizedResultImageURL','psnr'];
-
-    //dataSource = ELEMENT_DATA;
-
-     @Input() dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
+    displayedColumns = ['no', 'resizedStableServerImageURL', 'resizedDevServerImageURL', 'resizedResultImageURL','psnr'];
+    @Input() dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
     filsText:string;
     transparent = 3;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
     resize:string ='modify=resize&width=100&height=100';
-
+    errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
     defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
 
     constructor(private verifyImageListService: VerifyImageListService,
-                private cdr: ChangeDetectorRef) {
+                private cdr: ChangeDetectorRef,
+              private sharedService: SharedService) {
 }
-
 
 ngOnInit() {
   this.initData();
-
 }
 onClickClearButton() {
-
       this.initData();
-
-
-
 }
 
 onClickVerifyButton() {
-
-
-
       var counter = 1;
       RESULT_ELEMENT_DATA.length = 0;
 
@@ -72,12 +61,17 @@ onClickVerifyButton() {
             originalDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev';
             originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent;
 
-
-            console.log(PSNRURL);
-
             this.verifyImageListService.getPSNR(PSNRURL).subscribe(
             res => {
-                psnr = res['_body'];
+
+
+            if(res['status'] == 'fail') {
+                    psnr =  this.sharedService.decodeErrorCode(res['error_code']);
+
+                    resizedResultImageURL = this.errorImageURL;
+            } else {
+                    psnr =  this.sharedService.decodeResultCode(res);
+            }
 
                 RESULT_ELEMENT_DATA.push({no : counter++,
                                             resizedStableServerImageURL: resizedStableServerImageURL,
@@ -105,14 +99,10 @@ onClickVerifyButton() {
                 this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
             });
 
-
-
-
           }
                   ELEMENT_DATA.length = 0;
                   RESULT_ELEMENT_DATA.length =0;
 }
-
 
 fileUpload(event) {
 
