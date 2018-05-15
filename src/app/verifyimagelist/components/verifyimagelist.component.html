@@ -26,10 +26,6 @@
   <div class="example-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-
       <ng-container matColumnDef="no">
         <mat-header-cell *matHeaderCellDef fxFlex="30%"> No. </mat-header-cell>
         <mat-cell *matCellDef="let element" fxFlex="30%"> {{element.no}} </mat-cell>

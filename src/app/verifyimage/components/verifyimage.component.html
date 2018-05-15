@@ -22,56 +22,38 @@
 
 
 <div  class ="result-form">
-  <div style='display:inline;float:left;width:30%'>
-    <mat-card class="card">
-          <mat-card-header class="card-header">
-              <mat-card-title>Stable Server Image</mat-card-title>
-          </mat-card-header>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
 
-          <img  mat-card-image  src="{{resizedStableServerImageURL}}" >
-
-          <mat-card-content>
-            <a href="{{originalStableServerImageURL}}" style="text-decoration:none;">
-              Original Image
-            </a>
-          </mat-card-content>
+      <ng-container matColumnDef="no">
+        <mat-header-cell *matHeaderCellDef fxFlex="30%"> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="30%"> {{element.no}} </mat-cell>
+      </ng-container>
 
 
-    </mat-card>
+      <ng-container matColumnDef="resizedStableServerImageURL">
+        <mat-header-cell *matHeaderCellDef> StableServer </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a href={{element.originalStableServerImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedStableServerImageURL}}></a> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="resizedDevServerImageURL">
+        <mat-header-cell *matHeaderCellDef> DevServer </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a href={{element.originalDevServerImageURL}} target="_blank">  <img width="80" height="80" src={{element.resizedDevServerImageURL}}></a> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="resizedResultImageURL">
+        <mat-header-cell *matHeaderCellDef> Verified Image </mat-header-cell>
+        <mat-cell *matCellDef="let element">  <a href={{element.originalResultImageURL}} target="_blank"> <img width="80" height="80" src={{element.resizedResultImageURL}}></a> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="psnr">
+        <mat-header-cell *matHeaderCellDef> PSNR </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.psnr}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>
-
-  <div style='display:inline;float:left;width:30%; margin-left:40px'>
-    <mat-card class="card">
-          <mat-card-header class="card-header">
-              <mat-card-title>Dev Server Image</mat-card-title>
-          </mat-card-header>
-
-          <img  mat-card-image  src="{{resizedDevServerImageURL}}"  >
-          <mat-card-content>
-            <a href="{{originalDevServerImageURL}}" style="text-decoration:none;">
-              Original Image
-            </a>
-          </mat-card-content>
-
-
-
-    </mat-card>
-  </div>
-
-  <div style='display:inline;float:left;width:30%; margin-left:40px'>
-    <mat-card class="card">
-          <mat-card-header class="card-header">
-              <mat-card-title>Verified Image</mat-card-title>
-          </mat-card-header>
-
-          <img mat-card-image src="{{resizedResultImageURL}}"  >
-
-
-          <mat-card-content>
-            <a href="{{originalVerifyImageURL}}" style="text-decoration:none;">Original Image</a>
-            <p>PSNR : {{psnr}}</p>
-          </mat-card-content>
-
-    </mat-card>
-  </div>
-</div>

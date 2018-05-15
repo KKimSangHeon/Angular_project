@@ -20,7 +20,7 @@ export class VerifyImageListComponent implements OnInit {
     serverURL:string = 'http://10.106.151.156/verify';
     resize:string ='modify=resize&width=100&height=100';
     errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
-    defaultImageURL:string ='http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png';
+
 
     constructor(private verifyImageListService: VerifyImageListService,
                 private cdr: ChangeDetectorRef,
@@ -82,7 +82,7 @@ onClickVerifyButton() {
                                             originalResultImageURL: originalResultImageURL,
                                             psnr: psnr ,
                                             psnrURL:''});
-              this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
+                this.dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
             },
             err => {
                 psnr ='error';
