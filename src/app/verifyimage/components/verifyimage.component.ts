@@ -13,7 +13,7 @@ export class VerifyImageComponent  implements OnInit {
 
     displayedColumns = ['no', 'resizedStableServerImageURL', 'resizedDevServerImageURL', 'resizedResultImageURL','psnr'];
     @Input() dataSource = new MatTableDataSource<Element>(RESULT_ELEMENT_DATA);
-    transparent = 3;
+    transparent = 1;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
 
