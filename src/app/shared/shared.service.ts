@@ -17,6 +17,8 @@ export class SharedService {
           return 'DIFF NUM OF PIXEL';
         } else if(code =='-64') {
           return 'DIFF NUM OF FRAMES';
+        } else if(code =='-83') {
+          return 'EMPTY DATA';
         }
     }
 
@@ -24,9 +26,6 @@ export class SharedService {
         if ( code == '99999' ){
           return 'EQUAL DATA';
         }
-
-
-
         return code;
   }
 }
