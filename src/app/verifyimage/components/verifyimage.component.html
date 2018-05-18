@@ -14,10 +14,19 @@
           <div style='display:inline;float:left;width:60%'> <mat-slider  min="0" max="5" step="1" [(ngModel)]="transparent"class="input-element2"></mat-slider></div>
       </div>
 
+
       <div class="input-form-button">
        <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:60px;' (click) = "onClickVerifyButton()">Verify</button>
        <button mat-raised-button color="primary"  style='display:inline;float:right;width:10%; margin-right:20px;' (click)="onClickClearButton()">Clear</button>
       </div>
+
+      <mat-radio-group class ="color" [(ngModel)]="color">
+          <mat-radio-button value="1">Red</mat-radio-button>
+          <mat-radio-button value="2">Green</mat-radio-button>
+          <mat-radio-button value="3">Blue</mat-radio-button>
+          <mat-radio-button value="4">Black</mat-radio-button>
+      </mat-radio-group>
+
 </div>
 
 
@@ -57,3 +66,4 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
+</div>

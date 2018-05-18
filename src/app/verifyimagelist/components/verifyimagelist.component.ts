@@ -20,7 +20,7 @@ export class VerifyImageListComponent implements OnInit {
     serverURL:string = 'http://10.106.151.156/verify';
     resize:string ='modify=resize&width=100&height=100';
     errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
-
+    color:string = "3";
 
     constructor(private verifyImageListService: VerifyImageListService,
                 private cdr: ChangeDetectorRef,
@@ -55,11 +55,11 @@ onClickVerifyButton() {
             PSNRURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=figure';
             resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable&'+this.resize;
             resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev&'+this.resize;
-            resizedResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
+            resizedResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&bgColor='+this.color+'&';
 
             originalStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable';
             originalDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev';
-            originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent;
+            originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&bgColor='+this.color+'&';
 
             this.verifyImageListService.getPSNR(PSNRURL).subscribe(
             res => {

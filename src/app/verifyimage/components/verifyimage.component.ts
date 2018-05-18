@@ -29,7 +29,7 @@ export class VerifyImageComponent  implements OnInit {
     psnr:string = '0';
     resize:string ='modify=resize&width=100&height=100';
     PSNRURL:string = '';
-
+    color:string = "3";
 
 
     constructor(private verifyImageService: VerifyImageService,
@@ -74,11 +74,11 @@ onClickVerifyButton() {
     this.PSNRURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=figure';
     this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize;
     this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize;
-    this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent;
+    this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&bgColor='+this.color+'&';
 
     this.originalStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable';
     this.originalDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev';
-    this.originalResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent;
+    this.originalResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&bgColor='+this.color+'&';
 
 
 
