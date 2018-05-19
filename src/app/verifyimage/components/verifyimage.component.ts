@@ -74,11 +74,11 @@ onClickVerifyButton() {
     this.PSNRURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=figure';
     this.resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable&'+this.resize;
     this.resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev&'+this.resize;
-    this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&bgColor='+this.color+'&';
+    this.resizedResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&diffColor='+this.color+'&';
 
     this.originalStableServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=stable';
     this.originalDevServerImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=delivery&server=dev';
-    this.originalResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&bgColor='+this.color+'&';
+    this.originalResultImageURL = this.serverURL+ '?src=&amp;' +this.imageURL+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&diffColor='+this.color+'&';
 
 
 

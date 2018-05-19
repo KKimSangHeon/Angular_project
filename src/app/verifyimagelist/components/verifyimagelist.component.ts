@@ -55,11 +55,11 @@ onClickVerifyButton() {
             PSNRURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=figure';
             resizedStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable&'+this.resize;
             resizedDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev&'+this.resize;
-            resizedResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&bgColor='+this.color+'&';
+            resizedResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&'+this.resize+'&transparent='+this.transparent+'&diffColor='+this.color+'&';
 
             originalStableServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=stable';
             originalDevServerImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=delivery&server=dev';
-            originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&bgColor='+this.color+'&';
+            originalResultImageURL = this.serverURL+ '?src=&amp;' +url+'&amp;&action=verify&resType=image&transparent='+this.transparent+'&diffColor='+this.color+'&';
 
             this.verifyImageListService.getPSNR(PSNRURL).subscribe(
             res => {
