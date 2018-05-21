@@ -20,7 +20,7 @@ export class VerifyImageListComponent implements OnInit {
     serverURL:string = 'http://10.106.151.156/verify';
     resize:string ='modify=resize&width=100&height=100';
     errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
-    color:string = "3";
+    color:string = "5";
 
     constructor(private verifyImageListService: VerifyImageListService,
                 private cdr: ChangeDetectorRef,

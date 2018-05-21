@@ -29,7 +29,7 @@ export class VerifyImageComponent  implements OnInit {
     psnr:string = '0';
     resize:string ='modify=resize&width=100&height=100';
     PSNRURL:string = '';
-    color:string = "3";
+    color:string = "5";
 
 
     constructor(private verifyImageService: VerifyImageService,
