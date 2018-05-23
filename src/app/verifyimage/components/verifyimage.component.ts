@@ -27,7 +27,7 @@ export class VerifyImageComponent  implements OnInit {
     originalResultImageURL:string;
     counter = 1;
     psnr:string = '0';
-    resize:string ='modify=resize&width=100&height=100';
+    resize:string ='modify=resize&width=200&height=200';
     PSNRURL:string = '';
     color:string = "5";
 

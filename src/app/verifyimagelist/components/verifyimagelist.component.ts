@@ -18,7 +18,7 @@ export class VerifyImageListComponent implements OnInit {
     transparent = 1;
     imageURL:string = '';
     serverURL:string = 'http://10.106.151.156/verify';
-    resize:string ='modify=resize&width=100&height=100';
+    resize:string ='modify=resize&width=200&height=200';
     errorImageURL:string = 'https://cdn.browshot.com/static/images/not-found.png';
     color:string = "5";
 
