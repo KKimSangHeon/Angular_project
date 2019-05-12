@@ -1,5 +1,14 @@
 ﻿install list
 
+
+
+Node 6.11.0 
+https://nodejs.org/download/release/v6.11.0/
+
+Angular CLI 1.7.4
+npm install @angular/cli@1.7.4 -g
+
+
 npm install --save @angular/material
 
 npm install --save @angular/cdk
